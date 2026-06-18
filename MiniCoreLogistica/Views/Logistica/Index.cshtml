@@ -1,0 +1,68 @@
+@model MiniCoreLogistica.Models.ReporteEnviosViewModel
+
+@{
+    ViewData["Title"] = "Cálculo de Costos de Envío";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h3 class="card-title mb-0">Filtro de Envíos por Rango de Fechas</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="Index" method="post" class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label class="form-label font-weight-bold">Fecha Inicio:</label>
+                    <input type="date" asp-for="FechaInicio" class="form-control" required />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label font-weight-bold">Fecha Fin:</label>
+                    <input type="date" asp-for="FechaFin" class="form-control" required />
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="bi bi-filter"></i> Calcular Costos
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (Model.LineasReporte != null && Model.LineasReporte.Any())
+    {
+        <div class="card shadow-sm">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">Resultados del Período: @Model.FechaInicio?.ToString("dd/MM/yyyy") al @Model.FechaFin?.ToString("dd/MM/yyyy")</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0 alignment-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Repartidor</th>
+                            <th>Envíos</th>
+                            <th>Total kg</th>
+                            <th>Zona</th>
+                            <th>Tarifa / kg</th>
+                            <th>Costo Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var fila in Model.LineasReporte)
+                        {
+                            <tr>
+                                <td class="fw-bold">@fila.Repartidor</td>
+                                <td class="text-center"><span class="badge bg-info text-dark">@fila.EnviosContados</span></td>
+                                <td>@(fila.Aplica ? $"{fila.TotalKg} kg" : "—")</td>
+                                <td>@fila.Zona</td>
+                                <td>@(fila.Aplica ? fila.TarifaAplicada.ToString("C") : "—")</td>
+                                <td class="fw-bold text-success">
+                                    @(fila.Aplica ? fila.CostoTotal.ToString("C") : "No aplica")
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
