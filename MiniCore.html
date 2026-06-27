@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniCore Logística - Implementación Completa de Arquitectura GitHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased">
+
+    <header class="bg-slate-900 border-b border-slate-800 px-6 py-4 shadow-xl flex flex-col sm:flex-row justify-between items-center gap-4 shrink-0">
+        <div class="flex items-center gap-3">
+            <div class="p-2.5 bg-blue-600 rounded-xl text-white shadow-lg shadow-blue-600/20">
+                <i class="ph ph-truck text-2xl"></i>
+            </div>
+            <div>
+                <h1 class="text-lg font-bold tracking-tight text-white">MiniCore Logística S.A.</h1>
+                <p class="text-xs text-blue-400 font-medium">Arquitectura de Software Homologada al Repositorio Git</p>
+            </div>
+        </div>
+        
+        <nav class="flex bg-slate-950 p-1 rounded-xl border border-slate-800">
+            <button id="tab-btn-dashboard" class="px-4 py-2 text-xs font-bold rounded-lg transition-all duration-150 text-white bg-blue-600 shadow">
+                <i class="ph ph-package mr-1 inline-block align-middle text-sm"></i> Despacho e Inyección
+            </button>
+            <button id="tab-btn-editor" class="px-4 py-2 text-xs font-medium rounded-lg transition-all duration-150 text-slate-400 hover:text-slate-200">
+                <i class="ph ph-code mr-1 inline-block align-middle text-sm"></i> Editor Config C#
+            </button>
+            <button id="tab-btn-doc" class="px-4 py-2 text-xs font-medium rounded-lg transition-all duration-150 text-slate-400 hover:text-slate-200">
+                <i class="ph ph-file-text mr-1 inline-block align-middle text-sm"></i> Sustentación SOLID
+            </button>
+        </nav>
+
+        <div class="bg-slate-950 px-4 py-2 rounded-xl border border-slate-850 flex items-center gap-2 text-xs font-mono">
+            <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+            <span class="text-slate-400">Wilson Egas (UDLA)</span>
+        </div>
+    </header>
+
+    <main class="flex-1 overflow-hidden relative">
+
+        <div id="tab-dashboard" class="tab-content active h-full overflow-y-auto p-6">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <div class="bg-slate-900/60 border border-slate-800 p-5 rounded-2xl flex flex-col gap-4 backdrop-blur-sm">
+                    <div>
+                        <h2 class="text-sm font-bold text-blue-400 uppercase tracking-wider mb-1 flex items-center gap-2">
+                            <i class="ph ph-factory"></i> `EnvioFactory` (Factory Method)
+                        </h2>
+                        <p class="text-xs text-slate-400">Instancia polimórficamente las clases derivadas de envío leyendo los specs dinámicos.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-3">
+                        <button id="btn-add-estandar" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl transition flex items-center justify-between shadow-lg shadow-blue-600/10">
+                            <span class="flex items-center gap-2"><i class="ph ph-package"></i> Despachar Estándar</span>
+                            <span class="text-xs bg-blue-800 px-2 py-0.5 rounded-md text-blue-200">Clase Base</span>
+                        </button>
+                        <button id="btn-add-express" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-4 rounded-xl transition flex items-center justify-between border border-slate-700">
+                            <span class="flex items-center gap-2"><i class="ph ph-airplane-tilt"></i> Despachar Express</span>
+                            <span class="text-xs bg-slate-900 px-2 py-0.5 rounded-md text-slate-400">Prioritario</span>
+                        </button>
+                        <button id="btn-add-internacional" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-4 rounded-xl transition flex items-center justify-between shadow-lg shadow-amber-600/10">
+                            <span class="flex items-center gap-2"><i class="ph ph-globe"></i> Despachar Internacional</span>
+                            <span class="text-xs bg-amber-800 px-2 py-0.5 rounded-md text-amber-200">Requisito</span>
+                        </button>
+                    </div>
+
+                    <div class="mt-4 bg-slate-950/80 p-4 rounded-xl border border-slate-850 space-y-2">
+                        <span class="text-xs font-bold text-blue-400 flex items-center gap-1.5">
+                            <i class="ph ph-cpu"></i> Inyección en Entidades (`Core`)
+                        </span>
+                        <div class="text-[11px] text-slate-400 font-mono space-y-1">
+                            <p>• Año Fiscal Inyectado: <span id="lbl-year-status" class="text-emerald-400 font-bold">2026</span></p>
+                            <p>• Campos Expansión Sprint: <span id="lbl-props-count" class="text-emerald-400 font-bold">20</span></p>
+                            <p>• Patrón de Persistencia: <span class="text-amber-400 font-bold">`ILogisticaRepository` activo</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 bg-slate-900/40 border border-slate-800 rounded-2xl flex flex-col overflow-hidden">
+                    <div class="p-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/20">
+                        <div>
+                            <h2 class="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+                                <i class="ph ph-database"></i> Capa de Persistencia Volátil en Memoria
+                            </h2>
+                            <p class="text-xs text-blue-400">💡 Acciones disponibles: Ver trazabilidad detallada de los 20 campos o eliminar el registro de la memoria del repositorio.</p>
+                        </div>
+                        <span id="package-count" class="bg-blue-950 border border-blue-800 text-blue-400 text-xs px-2.5 py-1 rounded-full font-bold font-mono">0 Envíos</span>
+                    </div>
+
+                    <div class="p-5 overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-slate-800 text-xs text-slate-400 uppercase tracking-wider">
+                                    <th class="pb-3 pl-2">GUID Paquete</th>
+                                    <th class="pb-3">Tipo Objeto</th>
+                                    <th class="pb-3">Ruta Asignada</th>
+                                    <th class="pb-3">Costo Operativo</th>
+                                    <th class="pb-3">Año Control</th>
+                                    <th class="pb-3 text-right pr-2">Acciones transaccionales</th>
+                                </tr>
+                            </thead>
+                            <tbody id="package-table-body" class="text-sm divide-y divide-slate-900">
+                                </tbody>
+                        </table>
+                        <div id="empty-state" class="py-16 flex flex-col items-center justify-center text-slate-600 gap-2">
+                            <i class="ph ph-hard-drives text-4xl"></i>
+                            <p class="text-xs font-medium">Instancia objetos desde la factoría para activar la persistencia del repositorio.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="tab-editor" class="tab-content h-full overflow-y-auto p-6">
+            <div class="max-w-5xl mx-auto flex flex-col gap-4 h-full">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h2 class="text-base font-bold text-white flex items-center gap-2">
+                            <i class="ph ph-sliders"></i> Configuración de Inyección de Dependencias de Negocio
+                        </h2>
+                        <p class="text-xs text-slate-400">Modifica la metadata estructurada para simular cambios de requerimientos en tiempo de ejecución.</p>
+                    </div>
+                    <button id="btn-save-config" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg transition flex items-center gap-2">
+                        <i class="ph ph-floppy-disk text-sm"></i> Recompilar e Inyectar en Clases
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1 min-h-[400px]">
+                    <div class="lg:col-span-2 flex flex-col bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
+                        <textarea id="json-editor" class="flex-1 bg-slate-900/40 p-4 font-mono text-xs text-emerald-400 focus:outline-none resize-none leading-relaxed animate-none" spellcheck="false"></textarea>
+                    </div>
+                    <div class="bg-slate-900/60 border border-slate-800 p-5 rounded-2xl flex flex-col gap-4">
+                        <h3 class="text-xs font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1.5"><i class="ph ph-shield-check"></i> Principio de Extensibilidad</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Al estructurar las propiedades del MiniCore en un diccionario mapeado dinámicamente, demuestras el cumplimiento estricto del principio de **Inversión de Dependencias (DIP)**.
+                        </p>
+                        <div id="editor-toast" class="mt-auto hidden p-3 bg-emerald-950/60 border border-emerald-800 rounded-xl text-[11px] text-emerald-400 font-medium text-center">¡Atributos de Entidad Recompilados con Éxito!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-doc" class="tab-content h-full overflow-y-auto p-6">
+            <div class="max-w-4xl mx-auto bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
+                <h2 class="text-xl font-bold text-white border-b border-slate-800 pb-3 flex items-center gap-2">
+                    <i class="ph ph-certificate text-blue-400"></i> Arquitectura de Software - Sustentación MiniCore Logística
+                </h2>
+                <div class="space-y-4 text-xs text-slate-300 leading-relaxed">
+                    <div>
+                        <h3 class="text-sm font-bold text
