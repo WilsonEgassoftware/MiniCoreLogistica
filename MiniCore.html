@@ -110,7 +110,7 @@
                                 </tr>
                             </thead>
                             <tbody id="package-table-body" class="text-sm divide-y divide-slate-900">
-                                </tbody>
+                            </tbody>
                         </table>
                         <div id="empty-state" class="py-16 flex flex-col items-center justify-center text-slate-600 gap-2">
                             <i class="ph ph-hard-drives text-4xl"></i>
@@ -157,5 +157,52 @@
                     <i class="ph ph-certificate text-blue-400"></i> Arquitectura de Software - Sustentación MiniCore Logística
                 </h2>
                 <div class="space-y-4 text-xs text-slate-300 leading-relaxed">
-                    <div>
-                        <h3 class="text-sm font-bold text
+                    <div class="bg-slate-950 p-5 rounded-xl border border-slate-850 space-y-3">
+                        <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-1">
+                            <i class="ph ph-shield"></i> Cumplimiento de Principios SOLID
+                        </h3>
+                        <p>
+                            La arquitectura de este sistema de logística ha sido diseñada bajo estrictos estándares de ingeniería de software, garantizando un acoplamiento débil y una alta cohesión entre sus componentes. A continuación, se detalla la justificación técnica de los principios aplicados:
+                        </p>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-400">
+                            <li>
+                                <strong class="text-blue-400">Responsabilidad Única (SRP):</strong> Cada componente posee una única razón de cambio. Las entidades lógicas de negocio (`Envio`) gestionan exclusivamente sus metadatos e identidades, mientras que la persistencia queda relegada de forma aislada al repositorio.
+                            </li>
+                            <li>
+                                <strong class="text-blue-400">Abierto / Cerrado (OCP):</strong> El motor de distribución es completamente extensible pero inmune a modificaciones estructurales destructivas. Es posible inyectar nuevos flujos operativos o clases de envíos alternativos modificando la metadata del diccionario sin tocar el código base del sistema.
+                            </li>
+                            <li>
+                                <strong class="text-blue-400">Inversión de Dependencias (DIP):</strong> La interfaz de usuario nunca interactúa con implementaciones concretas ni infraestructuras físicas de almacenamiento. En su lugar, depende exclusivamente de la abstracción contractual definida en `ILogisticaRepository`, facilitando las pruebas unitarias y de aseguramiento de calidad (QA).
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Lógica de inicialización de la interfaz
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = { 'dashboard': document.getElementById('tab-btn-dashboard'), 'editor': document.getElementById('tab-btn-editor'), 'doc': document.getElementById('tab-btn-doc') };
+            const tabDivs = { 'dashboard': document.getElementById('tab-dashboard'), 'editor': document.getElementById('tab-editor'), 'doc': document.getElementById('tab-doc') };
+
+            const switchTab = (activeKey) => {
+                Object.keys(tabDivs).forEach(key => {
+                    if (key === activeKey) {
+                        tabDivs[key].classList.add('active');
+                        tabButtons[key].className = "px-4 py-2 text-xs font-bold rounded-lg transition-all duration-150 text-white bg-blue-600 shadow";
+                    } else {
+                        tabDivs[key].classList.remove('active');
+                        tabButtons[key].className = "px-4 py-2 text-xs font-medium rounded-lg transition-all duration-150 text-slate-400 hover:text-slate-200";
+                    }
+                });
+            };
+
+            tabButtons['dashboard'].addEventListener('click', () => switchTab('dashboard'));
+            tabButtons['editor'].addEventListener('click', () => switchTab('editor'));
+            tabButtons['doc'].addEventListener('click', () => switchTab('doc'));
+        });
+    </script>
+</body>
+</html>
